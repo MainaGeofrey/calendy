@@ -19,12 +19,14 @@
           v-on:disable="setDisabled"
           v-bind:autofocus="autofocus"
         />-->
-
+{{ showCalendarSlot }}
         <slot></slot>
-        <slot name="calendar" >
 
-        </slot>
+        <div v-if="showCalendarSlot"  class="vff-animate f-fade-in-up field-submittype">
+                <slot name="calendar" ></slot>
+        </div>
         
+
 
         <!-- Complete/Submit screen slots -->   
         <div v-if="isOnLastStep" class="vff-animate f-fade-in-up field-submittype">
@@ -180,7 +182,11 @@ export default defineComponent({
       autofocus: {
         type: Boolean,
         default: true
-      }
+      },
+            showCalendarSlot: {
+      type: Boolean,
+
+    },
     },
 
     mixins: [

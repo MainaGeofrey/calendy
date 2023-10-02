@@ -1,16 +1,23 @@
 <template>
-  <flow-form :questions="questions" :language="language">
-    <slot>
-      <CalendlyInlineWidget v-bind="options" />
-    </slot>
-  </flow-form>
-  <div class="calendly-inline-widget" style="min-width:320px;height:580px;" data-auto-load="false"></div>
+
+          <div v-if="showCalendarSlot"  class="vff-animate f-fade-in-up field-submittype">
+        <slot>
+        <CalendlyInlineWidget v-bind="options" />
+      </slot>
+          </div>
+          <div v-else>
+      <flow-form :questions="questions" :language="language" :showCalendarSlot="showCalendarSlot">
+
+    </flow-form>
+          </div>
+
+<!--  <div class="calendly-inline-widget" style="min-width:320px;height:580px;" data-auto-load="false"></div>-->
 </template>
 
 <script setup lang="ts">
 import { ref, defineProps, onMounted } from 'vue'
-import { QuestionModel, QuestionType, ChoiceOption, LanguageModel } from '@ditdot-dev/vue-flow-form'
-import FlowForm from './components/FlowForm.vue'
+import { FlowForm,QuestionModel, QuestionType, ChoiceOption, LanguageModel } from '@ditdot-dev/vue-flow-form'
+//import FlowForm from './components/FlowForm.vue'
 
 
 const options = {
@@ -21,6 +28,10 @@ const language = new LanguageModel({
   // Your language definitions here (optional).
   // You can leave out this prop if you want to use the default definitions.
 })
+
+
+
+const showCalendarSlot = ref(true);
 
 const questions = ref([
   new QuestionModel({
@@ -36,6 +47,7 @@ const questions = ref([
 useCalendlyEventListener({
   onDateAndTimeSelected: event => {
     console.log("onDateAndTimeSelected", event)
+    showCalendarSlot.value = false;
   },
 })
 
@@ -46,7 +58,7 @@ document.head.appendChild(recaptchaScript)*/
 })
 
 // Define props
-const { questions: propQuestions, language: propLanguage } = defineProps(['questions', 'language'])
+const { questions: propQuestions, language: propLanguage, showCalendarSlot: propshowCalendarSlot } = defineProps(['questions', 'language', 'showCalendarSlot'])
 </script>
 
 
