@@ -28,6 +28,11 @@ const questions = ref([
     ]
   })
 ])
+useCalendlyEventListener({
+  onDateAndTimeSelected: event => {
+    console.log("onDateAndTimeSelected", event)
+  },
+})
 
 onMounted(() => {
   
