@@ -31,7 +31,7 @@ export default defineNuxtConfig({
      * @default true
      * @description Disable if you already load https://assets.calendly.com/assets/external/close-icon.svg by yourself, or you want to load a custom SVG.
      */
-    loadWidgetCloseIconSvg: true
+    loadWidgetCloseIconSvg: true,
   },
   app: {
     head: {

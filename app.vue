@@ -1,16 +1,21 @@
 <template>
-  <flow-form :questions="questions" :language="language" />
+  <flow-form :questions="questions" :language="language">
+    <slot>
+      <CalendlyInlineWidget v-bind="options" />
+    </slot>
+  </flow-form>
   <div class="calendly-inline-widget" style="min-width:320px;height:580px;" data-auto-load="false"></div>
-  <CalendlyInlineWidget v-bind="options" />
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps,onMounted } from 'vue'
-import { FlowForm, QuestionModel, QuestionType, ChoiceOption, LanguageModel } from '@ditdot-dev/vue-flow-form'
+import { ref, defineProps, onMounted } from 'vue'
+import { QuestionModel, QuestionType, ChoiceOption, LanguageModel } from '@ditdot-dev/vue-flow-form'
+import FlowForm from './components/FlowForm.vue'
+
 
 const options = {
-        url: 'https://calendly.com/caeappt/speakwithanexpert',   
-    }
+  url: 'https://calendly.com/caeappt/speakwithanexpert',
+}
 
 const language = new LanguageModel({
   // Your language definitions here (optional).
@@ -35,7 +40,9 @@ useCalendlyEventListener({
 })
 
 onMounted(() => {
-  
+  /* let recaptchaScript = document.createElement('script')
+recaptchaScript.setAttribute('src', 'https://assets.calendly.com/assets/external/widget.js')
+document.head.appendChild(recaptchaScript)*/
 })
 
 // Define props
