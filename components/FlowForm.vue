@@ -22,7 +22,7 @@
 
         <slot></slot>
         <slot name="calendar" >
-CALENDAR
+
         </slot>
         
 
