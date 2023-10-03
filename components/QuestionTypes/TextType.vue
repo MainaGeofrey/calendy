@@ -49,13 +49,13 @@
 
   import BaseType from './BaseType.vue'
   import { QuestionType } from '../../models/QuestionModel'
-  import TheMask from 'vue-the-mask/src/component'
+  //import TheMask from 'vue-the-mask/src/component'
 
   export default {
     extends: BaseType,
     name: QuestionType.Text,
     components: {
-      TheMask
+      //TheMask
     },
 
     data() {

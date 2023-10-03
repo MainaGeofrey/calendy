@@ -17,6 +17,8 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@ditdot-dev/vue-flow-form": "^2.3.2"
+    "@ditdot-dev/vue-flow-form": "^2.3.2",
+        "vue-textarea-autosize": "^1.1.1",
+        "vue-the-mask": "^0.11.1"
   }
 }

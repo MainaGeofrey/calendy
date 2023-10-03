@@ -5,7 +5,7 @@
       <div class="f-form-wrap">
        
        
-       <!-- <flow-form-question
+       - <flow-form-question
           :ref="setQuestionRef"
           v-for="(q, index) in questionList"
           v-bind:question="q"
@@ -18,7 +18,7 @@
           v-bind:disabled="disabled"
           v-on:disable="setDisabled"
           v-bind:autofocus="autofocus"
-        />-->
+        />
 {{ showCalendarSlot }}
         <slot></slot>
 
