@@ -7,6 +7,7 @@
         v-bind:class="{ 'f-selected': option.selected }" v-bind:key="'m' + index" v-bind:aria-label="getLabel(index)"
         role="option">
 
+          <span class="f-tagline">{{ option.choiceTagLine }}</span> <!-- Added this line -->
 
         <span class="f-image" v-if="hasImages && option.imageSrc">
           <!--     <img v-bind:src="option.imageSrc" v-bind:alt="option.imageAlt">-->

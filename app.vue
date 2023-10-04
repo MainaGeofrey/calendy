@@ -78,14 +78,14 @@ const questions = ref([
         value: 'SUV',
 
       }),
-            new ChoiceOption({
+      new ChoiceOption({
         imageSrc: '~/assets/images/Depositphotos_564946972_S.jpg',
         imageAlt: 'Truck',
         label: 'Truck',
         value: 'Truck',
 
       }),
-            new ChoiceOption({
+      new ChoiceOption({
         imageSrc: '~/assets/images/Depositphotos_353686092_S.jpg',
         imageAlt: 'Van',
         label: 'Van',
@@ -137,10 +137,12 @@ const questions = ref([
     required: true,
     options: [
       new ChoiceOption({
+        choiceTagLine: 'Schedule a Call Back',
         label: 'Book a virtual appointment with an expert for an expedited pre-approval tailored to your specific needs',
         value: 'schedule_callback',
       }),
       new ChoiceOption({
+        choiceTagLine: 'Self-Serve',
         label: 'Enjoy a hassle-free experience using our platform and complete your pre-approval at your own pace',
         value: 'self_serve',
       }),
