@@ -5,7 +5,7 @@
     </slot>
   </div>
   <div v-else>
-    <flow-form :questions="questions" :language="language" :showCalendarSlot="showCalendarSlot" ref="form">
+    <flow-form :questions="questions" :language="language"  :launchCalendarCondition="launchCalendarCondition" v-on:calendar="handleShowCalendar" :nextStepIndex="nextStepIndex" ref="form">
 
     </flow-form>
   </div>
@@ -23,6 +23,12 @@ const options = {
   url: 'https://calendly.com/caeappt/speakwithanexpert',
 }
 
+
+
+const launchCalendarCondition = ref({
+  quizId: 'budget_range',
+  quizAnswer: 'schedule_callback'
+})
 const language = new LanguageModel({
   // Your language definitions here (optional).
   // You can leave out this prop if you want to use the default definitions.
@@ -30,7 +36,16 @@ const language = new LanguageModel({
 
 const formRef = ref()
 
-const showCalendarSlot = ref(true);
+const showCalendarSlot = ref(false);
+const calendarStepIndex = ref();
+const nextStepIndex = ref();
+
+const handleShowCalendar = (value: any) => { 
+  showCalendarSlot.value = true;
+  calendarStepIndex.value = value.currentStepIndex;
+  nextStepIndex.value = ++calendarStepIndex.value
+  console.log("^^^^^^^^^handle show calendar index^^^^^^^^^",calendarStepIndex.value)
+}
 
 const questions = ref([
   new QuestionModel({
@@ -43,7 +58,7 @@ const questions = ref([
     required: true,
     options: [
       new ChoiceOption({
-        imageSrc: './assets/images/facebook.png',
+        imageSrc: '~/assets/images/facebook.png',
         label: 'Ok, let\'s go with A',
         value: 'path_a',
 
@@ -113,21 +128,11 @@ const questions = ref([
 ])
 useCalendlyEventListener({
   onDateAndTimeSelected: event => {
-    console.log("onDateAndTimeSelected", event)
+    //console.log("onDateAndTimeSelected", event)
     showCalendarSlot.value = false;
   },
 })
 
-watchEffect(() => {
-  if (formRef.value) {
-    formRef.value.focus()
-
-      console.log(formRef.value)
-  } else {
-      console.log("not mounted")
-    // not mounted yet, or the element was unmounted (e.g. by v-if)
-  }
-})
 
 onMounted(() => {
   //formRef.value.focus()
@@ -138,7 +143,8 @@ document.head.appendChild(recaptchaScript)*/
 })
 
 // Define props
-const { questions: propQuestions, language: propLanguage, showCalendarSlot: propshowCalendarSlot } = defineProps(['questions', 'language', 'showCalendarSlot'])
+const { questions: propQuestions, language: propLanguage, 
+ launchCalendarCondition: proplaunchCalendarCondition, nextStepIndex: propNextStepIndex } = defineProps(['questions', 'language', 'showCalendarSlot'])
 </script>  
 
 
