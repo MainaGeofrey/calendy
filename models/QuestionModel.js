@@ -39,6 +39,7 @@ export const MaskPresets = Object.freeze({
 
 export class ChoiceOption {
   constructor(options) {
+    this.choiceTagLine = null; // Add choiceTagLine property
     this.label = ''
     this.value = null
     this.selected = false

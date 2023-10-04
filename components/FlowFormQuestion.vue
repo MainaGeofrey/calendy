@@ -2,7 +2,7 @@
 
 <template>
   <div class="vff-animate q-form" v-bind:class="mainClasses" ref="qanimate">
-    {{ showCalendar }}
+
     <div  class="q-inner">
       <div v-bind:class="{ 'f-section-wrap': question.type === QuestionType.SectionBreak }">
         <div v-bind:class="{ 'fh2': question.type !== QuestionType.SectionBreak }">

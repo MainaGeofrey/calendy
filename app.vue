@@ -1,21 +1,23 @@
 <template>
-  <div v-if="showCalendarSlot" class="vff-animate f-fade-in-up field-submittype">
-    <slot>
-      <CalendlyInlineWidget v-bind="options" />
-    </slot>
+  <div v-if="showCalendarSlot" class="">
+
+    <!--    
+      <CalendlyInlineWidget v-bind="options" />-->
+    <div class="calendly-inline-widget" data-url="https://calendly.com/caeappt/speakwithanexpert"
+      style="min-width:320px;height:700px;"></div>
+
   </div>
   <div v-else>
-    <flow-form :questions="questions" :language="language"  :launchCalendarCondition="launchCalendarCondition" v-on:calendar="handleShowCalendar" :nextStepIndex="nextStepIndex" ref="form">
+    <flow-form :questions="questions" :language="language" :launchCalendarCondition="launchCalendarCondition"
+      v-on:calendar="handleShowCalendar" :nextStepIndex="nextStepIndex" ref="form">
 
     </flow-form>
   </div>
-
-  <!--  <div class="calendly-inline-widget" style="min-width:320px;height:580px;" data-auto-load="false"></div>-->
 </template>
 
 <script setup lang="ts">
 import { ref, defineProps, onMounted } from 'vue'
-import {  QuestionModel, QuestionType, ChoiceOption, LanguageModel } from '@ditdot-dev/vue-flow-form'
+import { QuestionModel, QuestionType, ChoiceOption, LanguageModel } from '@ditdot-dev/vue-flow-form'
 import FlowForm from './components/FlowForm.vue'
 
 
@@ -40,11 +42,16 @@ const showCalendarSlot = ref(false);
 const calendarStepIndex = ref();
 const nextStepIndex = ref();
 
-const handleShowCalendar = (value: any) => { 
+const handleShowCalendar = (value: any) => {
   showCalendarSlot.value = true;
   calendarStepIndex.value = value.currentStepIndex;
   nextStepIndex.value = ++calendarStepIndex.value
-  console.log("^^^^^^^^^handle show calendar index^^^^^^^^^",calendarStepIndex.value)
+  console.log("^^^^^^^^^handle show calendar index^^^^^^^^^", calendarStepIndex.value)
+
+
+  let recaptchaScript = document.createElement('script')
+  recaptchaScript.setAttribute('src', 'https://assets.calendly.com/assets/external/widget.js')
+  document.head.appendChild(recaptchaScript)
 }
 
 const questions = ref([
@@ -53,33 +60,53 @@ const questions = ref([
     //tagline: 'Path B',
     title: '1.What is your preferred Vehicle Type?*',
     //subtitle: 'Path A sounds like a winner! 😉',
-    type: QuestionType.MultipleChoice,
+    type: QuestionType.MultiplePictureChoice,
     multiple: false,
     required: true,
     options: [
       new ChoiceOption({
-        imageSrc: '~/assets/images/facebook.png',
-        label: 'Ok, let\'s go with A',
-        value: 'path_a',
+        imageSrc: '~/assets/images/Depositphotos_7486411_S.jpg',
+        imageAlt: 'Sedan',
+        label: 'Sedan',
+        value: 'Sedan',
 
       }),
       new ChoiceOption({
-        label: 'Yes, finish the survey'
-      })
+        imageSrc: '~/assets/images/Depositphotos_526166136_S.jpg',
+        imageAlt: 'SUV',
+        label: 'SUV',
+        value: 'SUV',
+
+      }),
+            new ChoiceOption({
+        imageSrc: '~/assets/images/Depositphotos_564946972_S.jpg',
+        imageAlt: 'Truck',
+        label: 'Truck',
+        value: 'Truck',
+
+      }),
+            new ChoiceOption({
+        imageSrc: '~/assets/images/Depositphotos_353686092_S.jpg',
+        imageAlt: 'Van',
+        label: 'Van',
+        value: 'Van',
+
+      }),
     ],
     /*jump: {
       path_a: 'path_a'
     }*/
   }),
 
-      new QuestionModel({
+
+  new QuestionModel({
     id: 'budget_range',
     // tagline: '2.What is your Budget Range?*',
     title: '2.What is your Budget Range?*',
     helpTextShow: false,
     type: QuestionType.MultipleChoice,
     multiple: false,
-   // allowOther: true,
+    // allowOther: true,
     required: true,
     options: [
       new ChoiceOption({
@@ -101,7 +128,7 @@ const questions = ref([
 
   new QuestionModel({
     id: 'budget_range',
-    tagline: '3.What is your Budget Range?*',
+    tagline: '',
     //title: 'Multiple choice question:',
     helpTextShow: false,
     type: QuestionType.MultipleChoice,
@@ -135,24 +162,13 @@ useCalendlyEventListener({
 
 
 onMounted(() => {
-  //formRef.value.focus()
-  console.log(formRef.value)
-  /* let recaptchaScript = document.createElement('script')
-recaptchaScript.setAttribute('src', 'https://assets.calendly.com/assets/external/widget.js')
-document.head.appendChild(recaptchaScript)*/
+
+
 })
 
 // Define props
-const { questions: propQuestions, language: propLanguage, 
- launchCalendarCondition: proplaunchCalendarCondition, nextStepIndex: propNextStepIndex } = defineProps(['questions', 'language', 'showCalendarSlot'])
+const { questions: propQuestions, language: propLanguage,
+  launchCalendarCondition: proplaunchCalendarCondition, nextStepIndex: propNextStepIndex } = defineProps(['questions', 'language', 'showCalendarSlot'])
 </script>  
 
 
-<style>
-/* Import Vue Flow Form base CSS */
-@import '@ditdot-dev/vue-flow-form/dist/vue-flow-form.css';
-/* Import one of the Vue Flow Form CSS themes (optional) */
-@import '@ditdot-dev/vue-flow-form/dist/vue-flow-form.theme-minimal.css'; 
-/* @import '~@ditdot-dev/vue-flow-form/dist/vue-flow-form.theme-green.css'; */
-/* @import '~@ditdot-dev/vue-flow-form/dist/vue-flow-form.theme-purple.css'; */
-</style>

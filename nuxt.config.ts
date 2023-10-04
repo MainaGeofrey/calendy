@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {},
   },
-  css: [],
+  css: ["~/assets/css/themes/theme-minimal.css", "~/assets/css/common.css"],
   ssr: false,
   modules: ["nuxt-calendly"],
   // entirely optional
